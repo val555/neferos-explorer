@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;600;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Définition des couleurs Neferos */
+  --color-neferos-accent: #a400c0;
+  --color-neferos-light: #e36bed;
+  --color-neferos-dark: #361133;
+  --color-neferos-bg-dark: #1c1425;
+  --color-neferos-bg-surface: #2f1c42;
+  --color-neferos-text: #ffffff;
+  --color-neferos-text-secondary: #c7bdd5;
+  --color-neferos-text-pink: #e3b6ed;
+
+  /* Définition de la police personnalisée */
+  --font-tektur: 'Tektur', sans-serif;
+}
+
+body {
+  @apply bg-neferos-bg-dark text-neferos-text antialiased;
+  margin: 0;
+  overflow: hidden; /* Important pour éviter les scrollbars parasites avec la 3D */
+}
+
+/* Utilitaires pour le Layout */
+.layout-container {
+  @apply relative w-full h-screen overflow-hidden;
+}
+
+.content-layer {
+  @apply relative z-10 w-full h-full pointer-events-none; /* z-10 pour être au dessus des étoiles */
+}
+
+.content-layer > * {
+  @apply pointer-events-auto; /* Réactive les clics sur les éléments enfants */
+}

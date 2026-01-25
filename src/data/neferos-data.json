@@ -1,0 +1,52 @@
+{
+  "galaxyName": "Neferos",
+  "description": "Une galaxie spirale ancienne aux secrets oubliés.",
+  "sectors": [
+    {
+      "id": "sector-nord",
+      "name": "Secteur Saïdour",
+      "color": "#a400c0",
+      "position": { "x": 26, "y": 23.5 },
+      "systems": [
+        {
+          "id": "system-intavir",
+          "name": "Système Intavir",
+          "position": { "x": 20, "y": 30 },
+          "starType": "Blue Giant",
+          "planets": [
+            {
+              "id": "planet-Drogmoss",
+              "name": "Drogmoss",
+              "type": "Glaciale",
+              "texture": "/textures/Drogmoss-2K.png",
+              "description": "Un monde de glace",
+              "distanceAU": 0.4,
+              "radius": 1.2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sector-sud",
+      "name": "Secteur Anjoury",
+      "color": "#e36bed",
+      "position": { "x": 76, "y": 76.5 },
+      "systems": []
+    },
+    {
+      "id": "sector-est",
+      "name": "Secteur Skort",
+      "color": "#361133",
+      "position": { "x": 79.9, "y": 25.7 },
+      "systems": []
+    },
+    {
+      "id": "sector-ouest",
+      "name": "Secteur Libre",
+      "color": "#614e78",
+      "position": { "x": 22.3, "y": 74 },
+      "systems": []
+    }
+  ]
+}
