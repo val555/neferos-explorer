@@ -2,18 +2,18 @@
 import { motion } from 'framer-motion';
 import galaxyData from '../data/neferos-data.json';
 import SectorButton from '../components/galaxy/SectorButton';
+import galaxySpiral from '../assets/images/galaxy-spiral.svg';
 
 export default function HomePage() {
   const { galaxyName, sectors } = galaxyData;
   const ROTATION_DURATION = 300;
 
   return (
-    // J'ajoute pt-20 (padding-top) pour compenser la navbar
-    // et flex-col pour bien gérer l'espace vertical
-    <div className="w-full min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 relative">
+    // Nettoyage: Plus de pt-20, plus de min-h-screen
+    <div className="w-full flex flex-col items-center justify-center relative py-10">
       
-      {/* 1. TITRE PRINCIPAL (Descendu un peu plus) */}
-      <div className="absolute top-24 md:top-32 left-1/2 -translate-x-1/2 text-center z-20 flex flex-col items-center pointer-events-none">
+      {/* 1. TITRE PRINCIPAL */}
+      <div className="absolute top-0 md:top-10 left-1/2 -translate-x-1/2 text-center z-20 flex flex-col items-center pointer-events-none">
         <h1 className="font-tektur font-normal text-4xl md:text-6xl text-white tracking-widest mb-1 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
           {galaxyName}
         </h1>
@@ -22,8 +22,8 @@ export default function HomePage() {
         </span>
       </div>
 
-      {/* 2. Galaxie qui tourne (Un peu plus bas aussi) */}
-      <div className="relative w-full max-w-150 md:max-w-200 aspect-square flex items-center justify-center mt-10 md:mt-0"> 
+      {/* 2. Galaxie qui tourne */}
+      <div className="relative w-full max-w-150 md:max-w-200 aspect-square flex items-center justify-center mt-20 md:mt-10"> 
         
         <motion.div 
           className="relative w-full h-full"
@@ -35,7 +35,7 @@ export default function HomePage() {
           }}
         >
           <img 
-            src="/images/galaxy-spiral.svg" 
+            src={galaxySpiral}
             alt="Galaxie Neferos" 
             className="absolute inset-0 w-full h-full object-contain p-4 opacity-90"
           />

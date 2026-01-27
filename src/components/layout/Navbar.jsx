@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import logoNeferos from '../../assets/images/logo-neferos.png'; 
 
 const navigation = [
   { name: 'Galaxie', href: '/' },
@@ -39,7 +40,7 @@ export default function Navbar() {
               <Link to="/">
                 <img
                   alt="Neferos Explorer"
-                  src="/images/logo-neferos.png"
+                  src={logoNeferos} 
                   className="h-8 w-auto object-contain hover:opacity-80 transition-opacity"
                 />
               </Link>

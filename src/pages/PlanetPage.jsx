@@ -23,10 +23,11 @@ export default function PlanetPage() {
     if (foundPlanet) break;
   }
 
-  if (!foundPlanet) return <div className="pt-40 text-center text-white">Planète introuvable</div>;
+  if (!foundPlanet) return <div className="text-center text-white pt-10">Planète introuvable</div>;
 
   return (
-    <div className="w-full h-screen relative bg-black overflow-hidden font-tektur">
+    // Adaptation MainLayout : cadre arrondi, hauteur calculée
+    <div className="w-full h-[calc(100vh-8rem)] relative overflow-hidden font-tektur rounded-2xl border border-white/5 bg-black/20">
       
       {/* 1. SCÈNE 3D (FOND) */}
       <div className="absolute inset-0 z-0">
@@ -34,12 +35,12 @@ export default function PlanetPage() {
       </div>
 
       {/* 2. UI LAYER (INTERFACE) */}
-      <div className="absolute inset-0 z-10 pointer-events-none p-8 md:p-12 flex flex-col justify-between">
+      <div className="absolute inset-0 z-10 pointer-events-none p-4 md:p-8 flex flex-col justify-between">
         
         {/* --- HEADER (Haut Gauche & Droite) --- */}
         <div className="flex justify-between items-start pointer-events-auto w-full">
           
-          {/* BOUTON RETOUR (Haut Gauche) */}
+          {/* BOUTON RETOUR */}
           <Link 
             to={`/system/${parentSystem.id}`} 
             className="flex items-center gap-2 text-neferos-accent text-sm tracking-widest hover:text-white transition-colors group opacity-80 hover:opacity-100"
@@ -48,54 +49,48 @@ export default function PlanetPage() {
             <span className="uppercase">Retour Système {parentSystem.name}</span>
           </Link>
 
-          {/* LOGO FACTION (Haut Droite) */}
+          {/* LOGO FACTION */}
           <motion.div 
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
             className="flex items-center gap-4"
           >
-            {/* Logo Cercle (Simulé) */}
-            <div className="w-16 h-16 rounded-full border-2 border-white/80 flex items-center justify-center relative">
-               <div className="absolute inset-0 border border-white/30 rounded-full scale-110" /> {/* Cercle externe fin */}
-               <span className="text-2xl">ᛟ</span> {/* Rune unicode temporaire */}
+            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-white/80 flex items-center justify-center relative">
+               <div className="absolute inset-0 border border-white/30 rounded-full scale-110" /> 
+               <span className="text-xl md:text-2xl">ᛟ</span> 
             </div>
-            <span className="text-2xl font-bold text-white uppercase tracking-widest">
+            <span className="text-lg md:text-2xl font-bold text-white uppercase tracking-widest hidden md:block">
               Faction Saïdour
             </span>
           </motion.div>
         </div>
 
 
-        {/* --- BLOC INFO PRINCIPAL (Milieu Gauche) --- */}
+        {/* --- BLOC INFO PRINCIPAL --- */}
         <div className="flex-1 flex items-center pointer-events-none">
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative ml-16 md:ml-32 max-w-md pointer-events-auto" // Décalage pour laisser place au breadcrumb et à la planète
+            className="relative ml-4 md:ml-16 max-w-md pointer-events-auto mt-10"
           >
             
-            {/* Ligne Décorative Verticale à gauche du texte */}
-            <div className="absolute -left-8 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-neferos-accent to-transparent opacity-50" />
+            <div className="absolute -left-6 md:-left-8 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-neferos-accent to-transparent opacity-50" />
             
-            {/* Runes / Décoration Haut */}
             <div className="text-neferos-accent text-xs tracking-[0.5em] mb-2 opacity-80">
               ᚲᛟᚾᚾᛖᚲᛏᛁᛟᚾ
             </div>
 
-            {/* TITRE PLANÈTE */}
-            <h1 className="text-6xl md:text-7xl font-bold text-white uppercase tracking-wider mb-1 leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+            <h1 className="text-5xl md:text-7xl font-bold text-white uppercase tracking-wider mb-1 leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
               {foundPlanet.name}
             </h1>
             
-            {/* SOUS-TITRE */}
-            <h2 className="text-xl text-white/50 uppercase tracking-[0.2em] font-light mb-6">
+            <h2 className="text-lg md:text-xl text-white/50 uppercase tracking-[0.2em] font-light mb-6">
               Solar System • {parentSystem.name}
             </h2>
 
-            {/* DESCRIPTION */}
-            <p className="text-neferos-text-secondary text-sm md:text-base leading-relaxed font-sans border-l-2 border-white/10 pl-4 mb-8">
+            <p className="text-neferos-text-secondary text-sm md:text-base leading-relaxed font-sans border-l-2 border-white/10 pl-4 mb-8 bg-black/30 md:bg-transparent p-2 md:p-0 rounded md:rounded-none backdrop-blur-md md:backdrop-blur-none">
               {foundPlanet.description}
               <br/><br/>
               <span className="text-xs opacity-60">
@@ -103,16 +98,14 @@ export default function PlanetPage() {
               </span>
             </p>
 
-            {/* BOITE D'AVERTISSEMENT (Bas) */}
-            <div className="border border-white/20 bg-neferos-bg-surface/40 backdrop-blur-sm p-4 rounded-br-2xl relative overflow-hidden group hover:border-neferos-accent/50 transition-colors">
-              <div className="absolute top-0 left-0 w-1 h-full bg-neferos-accent" /> {/* Barre accent gauche */}
+            <div className="border border-white/20 bg-neferos-bg-surface/60 backdrop-blur-md p-4 rounded-br-2xl relative overflow-hidden group hover:border-neferos-accent/50 transition-colors">
+              <div className="absolute top-0 left-0 w-1 h-full bg-neferos-accent" /> 
               
               <p className="text-xs text-white/80 font-mono uppercase tracking-wide">
                 <span className="text-neferos-accent font-bold mr-2">WARNING:</span>
                 Avoid firing proton torpedos in the clouds to prevent lighting the atmospheric hydrogen on fire.
               </p>
               
-              {/* Petits carrés tech à droite */}
               <div className="absolute right-2 top-2 flex flex-col gap-1">
                 <div className="w-1 h-1 bg-white/50" />
                 <div className="w-1 h-1 bg-white/30" />
