@@ -67,15 +67,7 @@ export default function PlanetPage() {
           1. SCÈNE 3D (Background Layer)
           ============================================ */}
       <div className="absolute inset-0 z-0">
-        <PlanetScene planet={foundPlanet} />
-        
-        {/* Gradient Overlay MODIFIÉ pour laisser voir les étoiles */}
-        {/* 
-            - from-black/20 (au lieu de 900/80) : Très léger en haut pour voir les étoiles
-            - via-transparent : Centre clair
-            - to-neutral-900/90 : Bas sombre pour lisibilité du texte
-        */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-neutral-900/90 md:bg-gradient-to-r md:from-neutral-900/90 md:via-transparent md:to-neutral-900/20 pointer-events-none" />
+        <PlanetScene planet={foundPlanet} />    
       </div>
 
 
