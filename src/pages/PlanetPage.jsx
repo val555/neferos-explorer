@@ -9,6 +9,7 @@
  * - Corrected data display
  */
 
+
 import { useParams, Link } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
@@ -17,13 +18,16 @@ import PlanetScene from '../components/planet/PlanetScene';
 import { H1, H2, Body, BodySmall, Label, TechLabel } from '../components/design-system/Text';
 import {    variants } from '../theme';
 
+
 export default function PlanetPage() {
   const { planetId } = useParams();
+
 
   // Recherche de la planète
   let foundPlanet = null;
   let parentSystem = null;
   let parentSector = null;
+
 
   for (const sector of galaxyData.sectors) {
     for (const system of sector.systems) {
@@ -38,6 +42,7 @@ export default function PlanetPage() {
     if (foundPlanet) break;
   }
 
+
   if (!foundPlanet) {
     return (
       <div className="w-full h-screen flex items-center justify-center">
@@ -46,25 +51,30 @@ export default function PlanetPage() {
     );
   }
 
+
   // Correction du texte "Système" doublé
   // Si le nom du système contient déjà "Système", on ne l'affiche pas deux fois
   const systemNameDisplay = parentSystem.name.toLowerCase().includes('système') 
     ? parentSystem.name.toUpperCase() 
     : `SYSTÈME ${parentSystem.name.toUpperCase()}`;
 
+
   return (
     // Main container: occupe tout l'espace disponible sous la navbar
+    // Suppression de border-2 border-red-500
     <div className="w-full h-[calc(100vh-6rem)] relative overflow-hidden font-space-grotesk bg-neutral-900">
       
       {/* ============================================
           1. SCÈNE 3D (Background Layer)
           ============================================ */}
+      {/* Suppression de border-2 border-green-500 */}
       <div className="absolute inset-0 z-0">
         <PlanetScene planet={foundPlanet} />
         {/* Gradient Overlay RENFORCÉ pour mobile */}
         {/* Sur mobile, on veut assombrir le haut et le bas pour que le texte soit lisible */}
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/80 via-transparent to-neutral-900/90 md:bg-gradient-to-r md:from-neutral-900/90 md:via-transparent md:to-neutral-900/20 pointer-events-none" />
       </div>
+
 
       {/* ============================================
           2. UI LAYER (Grid Layout)
@@ -79,8 +89,10 @@ export default function PlanetPage() {
         {/* COLONNE 1: Espace réservé pour le Breadcrumb (Desktop uniquement) */}
         <div className="hidden md:block" /> 
 
+
         {/* COLONNE 2: Contenu Principal */}
         <div className="flex flex-col justify-start md:justify-center h-full px-4 md:px-0 relative z-20 pt-20 md:pt-0 overflow-y-auto md:overflow-visible pb-32 md:pb-0 scrollbar-hide">
+
 
           <motion.div 
             variants={variants.staggerContainer}
@@ -98,6 +110,7 @@ export default function PlanetPage() {
                 className="absolute -left-6 top-0 w-1 bg-gradient-to-b from-purple-200 via-pink-400 to-transparent opacity-60 hidden md:block rounded-full" 
               />
 
+
               <motion.div variants={variants.slideInLeft} className="space-y-1 md:space-y-2">
                 {/* TechLabel déplacé sous le bouton retour sur mobile */}
                 <TechLabel className="text-pink-400 opacity-90 text-[10px] md:text-sm tracking-widest bg-neutral-900/50 md:bg-transparent backdrop-blur md:backdrop-filter-none w-fit px-2 py-1 rounded md:p-0 mb-2 md:mb-0">
@@ -109,6 +122,7 @@ export default function PlanetPage() {
                   {foundPlanet.name}
                 </H1>
 
+
                 <div className="flex items-center gap-3 mt-2">
                   <span className="w-8 md:w-12 h-px bg-purple-200/50"></span>
                   <H2 color="secondary" className="text-xs md:text-base tracking-[0.2em] md:tracking-[0.3em] font-light text-purple-100">
@@ -118,10 +132,12 @@ export default function PlanetPage() {
               </motion.div>
             </div>
 
+
             {/* BLOC DESCRIPTION - Fond renforcé pour lisibilité sur mobile */}
             <motion.div 
               variants={variants.slideInLeft}
-              className="mt-[45vh] bg-neutral-900/80 md:bg-neutral-900/40 backdrop-blur-xl p-5 md:p-6 rounded-xl border border-white/10 md:border-white/5 shadow-2xl max-w-xl"
+              // Augmentation de la marge top : mt-[55vh] au lieu de mt-[45vh]
+              className="mt-[55vh] bg-neutral-900/80 md:bg-neutral-900/40 backdrop-blur-xl p-5 md:p-6 rounded-xl border border-white/10 md:border-white/5 shadow-2xl max-w-xl"
             >
               <Body className="text-neutral-100 text-base md:text-lg leading-relaxed font-light">
                 {foundPlanet.description}
@@ -134,6 +150,7 @@ export default function PlanetPage() {
                 </BodySmall>
               </div>
             </motion.div>
+
 
             {/* BLOC DANGER */}
             <motion.div 
@@ -151,10 +168,12 @@ export default function PlanetPage() {
                </div>
             </motion.div>
 
+
           </motion.div>
         </div>
         
       </div>
+
 
       {/* FOOTER STATS (Mobile: Grid 2x2 compacte, Desktop: Bar horizontale) */}
       <motion.div 
@@ -200,6 +219,7 @@ export default function PlanetPage() {
             </span>
           </motion.div>
       </div>
+
 
     </div>
   );
