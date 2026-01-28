@@ -68,9 +68,14 @@ export default function PlanetPage() {
           ============================================ */}
       <div className="absolute inset-0 z-0">
         <PlanetScene planet={foundPlanet} />
-        {/* Gradient Overlay RENFORCÉ pour mobile */}
-        {/* Sur mobile, on veut assombrir le haut et le bas pour que le texte soit lisible */}
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/80 via-transparent to-neutral-900/90 md:bg-gradient-to-r md:from-neutral-900/90 md:via-transparent md:to-neutral-900/20 pointer-events-none" />
+        
+        {/* Gradient Overlay MODIFIÉ pour laisser voir les étoiles */}
+        {/* 
+            - from-black/20 (au lieu de 900/80) : Très léger en haut pour voir les étoiles
+            - via-transparent : Centre clair
+            - to-neutral-900/90 : Bas sombre pour lisibilité du texte
+        */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-neutral-900/90 md:bg-gradient-to-r md:from-neutral-900/90 md:via-transparent md:to-neutral-900/20 pointer-events-none" />
       </div>
 
 
@@ -89,8 +94,8 @@ export default function PlanetPage() {
 
 
         {/* COLONNE 2: Contenu Principal */}
-        {/* Modification Layout Mobile: justify-start -> min-h-full pour permettre le justify-between interne */}
-        <div className="flex flex-col justify-start md:justify-center h-full px-4 md:px-0 relative z-20 pt-4 md:pt-0 overflow-y-auto md:overflow-visible pb-32 md:pb-0 scrollbar-hide">
+        {/* Modification ici : pt-20 pour que le titre soit SOUS la navbar (qui fait ~80px) */}
+        <div className="flex flex-col justify-start md:justify-center h-full px-4 md:px-0 relative z-20 pt-20 md:pt-0 overflow-y-auto md:overflow-visible pb-32 md:pb-0 scrollbar-hide">
 
 
           <motion.div 
@@ -98,7 +103,7 @@ export default function PlanetPage() {
             initial="hidden"
             animate="visible"
             // Layout FLEX vertical qui sépare le haut (titre) du bas (description)
-            // min-h-full permet de forcer le contenu à prendre toute la hauteur dispo (si peu de contenu)
+            // min-h-full permet de forcer le contenu à prendre toute la hauteur dispo
             className="flex flex-col justify-between md:justify-center gap-4 md:gap-8 pointer-events-auto min-h-full md:min-h-0"
           >
             {/* BLOC TITRE PRINCIPAL (En haut) */}
@@ -118,7 +123,7 @@ export default function PlanetPage() {
                   PLANÈTE GLACIALE • CLASSE IV
                 </TechLabel>
                 
-                {/* Titre ajusté pour mobile (break-words pour éviter la coupure "D...") */}
+                {/* Titre ajusté pour mobile */}
                 <H1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl leading-none text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-neutral-400 drop-shadow-lg break-words hyphens-auto w-full max-w-[90vw]">
                   {foundPlanet.name}
                 </H1>
@@ -126,16 +131,16 @@ export default function PlanetPage() {
 
                 <div className="flex items-center gap-3 mt-2">
                   <span className="w-8 md:w-12 h-px bg-purple-200/50"></span>
-                    <span className="font-tektur font-light text-[10px] md:text-sm tracking-[0.3em] uppercase text-purple-200">
-                      {systemNameDisplay}
-                    </span>
+                  {/* Titre système corrigé (fin et petit) */}
+                  <span className="font-tektur font-light text-[10px] md:text-sm tracking-[0.3em] uppercase text-purple-200">
+                    {systemNameDisplay}
+                  </span>
                 </div>
               </motion.div>
             </div>
 
 
             {/* BLOC DESCRIPTION (En bas grâce au justify-between) */}
-            {/* Suppression du mt-[...] magique */}
             <motion.div 
               variants={variants.slideInLeft}
               className="bg-neutral-900/80 md:bg-neutral-900/40 backdrop-blur-xl p-5 md:p-6 rounded-xl border border-white/10 md:border-white/5 shadow-2xl max-w-xl md:mt-0"
