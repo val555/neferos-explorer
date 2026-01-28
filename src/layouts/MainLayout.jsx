@@ -17,14 +17,12 @@ const MainLayout = () => {
         <Navbar />
       </div>
 
-      {/* 3. BREADCRUMB (Layer 40) - Fixe */}
-      <div className="fixed top-20 left-4 z-40">
-        <Breadcrumb />
-      </div>
+      {/* 3. BREADCRUMB (Layer 40) - Position gérée par le composant lui-même */}
+      <Breadcrumb />
 
       {/* 4. ZONE DE CONTENU (Layer 10) - Scrollable */}
-      {/* pt-24 compense la hauteur de la navbar + breadcrumb */}
-      <main className="relative z-10 w-full min-h-screen pt-24 px-4 pb-10">
+      {/* Mobile: pt-0 (le contenu gère son espacement) / Desktop: pt-24 (espace pour header + breadcrumb) */}
+      <main className="relative z-10 w-full min-h-screen pt-0 md:pt-24 px-4 pb-10">
         <Outlet />
       </main>
       
