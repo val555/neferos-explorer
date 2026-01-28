@@ -67,7 +67,7 @@ export default function PlanetPage() {
           1. SCÈNE 3D (Background Layer)
           ============================================ */}
       <div className="absolute inset-0 z-0">
-        <PlanetScene planet={foundPlanet} />    
+        <PlanetScene planet={foundPlanet} />
       </div>
 
 
