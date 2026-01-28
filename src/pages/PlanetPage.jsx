@@ -61,13 +61,11 @@ export default function PlanetPage() {
 
   return (
     // Main container: occupe tout l'espace disponible sous la navbar
-    // Suppression de border-2 border-red-500
     <div className="w-full h-[calc(100vh-6rem)] relative overflow-hidden font-space-grotesk bg-neutral-900">
       
       {/* ============================================
           1. SCÈNE 3D (Background Layer)
           ============================================ */}
-      {/* Suppression de border-2 border-green-500 */}
       <div className="absolute inset-0 z-0">
         <PlanetScene planet={foundPlanet} />
         {/* Gradient Overlay RENFORCÉ pour mobile */}
@@ -91,16 +89,19 @@ export default function PlanetPage() {
 
 
         {/* COLONNE 2: Contenu Principal */}
-        <div className="flex flex-col justify-start md:justify-center h-full px-4 md:px-0 relative z-20 pt-20 md:pt-0 overflow-y-auto md:overflow-visible pb-32 md:pb-0 scrollbar-hide">
+        {/* Modification Layout Mobile: justify-start -> min-h-full pour permettre le justify-between interne */}
+        <div className="flex flex-col justify-start md:justify-center h-full px-4 md:px-0 relative z-20 pt-4 md:pt-0 overflow-y-auto md:overflow-visible pb-32 md:pb-0 scrollbar-hide">
 
 
           <motion.div 
             variants={variants.staggerContainer}
             initial="hidden"
             animate="visible"
-            className="flex flex-col gap-4 md:gap-8 pointer-events-auto mt-0 md:mt-0"
+            // Layout FLEX vertical qui sépare le haut (titre) du bas (description)
+            // min-h-full permet de forcer le contenu à prendre toute la hauteur dispo (si peu de contenu)
+            className="flex flex-col justify-between md:justify-center gap-4 md:gap-8 pointer-events-auto min-h-full md:min-h-0"
           >
-            {/* BLOC TITRE PRINCIPAL */}
+            {/* BLOC TITRE PRINCIPAL (En haut) */}
             <div className="relative">
               {/* Ligne décorative verticale (Desktop) */}
               <motion.div 
@@ -133,11 +134,11 @@ export default function PlanetPage() {
             </div>
 
 
-            {/* BLOC DESCRIPTION - Fond renforcé pour lisibilité sur mobile */}
+            {/* BLOC DESCRIPTION (En bas grâce au justify-between) */}
+            {/* Suppression du mt-[...] magique */}
             <motion.div 
               variants={variants.slideInLeft}
-              // Augmentation de la marge top : mt-[55vh] au lieu de mt-[45vh]
-              className="mt-[55vh] bg-neutral-900/80 md:bg-neutral-900/40 backdrop-blur-xl p-5 md:p-6 rounded-xl border border-white/10 md:border-white/5 shadow-2xl max-w-xl"
+              className="bg-neutral-900/80 md:bg-neutral-900/40 backdrop-blur-xl p-5 md:p-6 rounded-xl border border-white/10 md:border-white/5 shadow-2xl max-w-xl md:mt-0"
             >
               <Body className="text-neutral-100 text-base md:text-lg leading-relaxed font-light">
                 {foundPlanet.description}
@@ -152,12 +153,12 @@ export default function PlanetPage() {
             </motion.div>
 
 
-            {/* BLOC DANGER */}
+            {/* BLOC DANGER (Caché sur mobile) */}
             <motion.div 
               variants={variants.scaleUp}
-              className="mt-2"
+              className="mt-2 hidden md:block"
             >
-               <div className="hidden md:inline-flex items-center gap-3 md:gap-4 bg-red-950/80 md:bg-red-950/40 backdrop-blur border border-red-500/30 pl-3 pr-5 py-3 rounded-lg border-l-4 border-l-red-500 hover:bg-red-950/60 transition-colors max-w-full">
+               <div className="inline-flex items-center gap-3 md:gap-4 bg-red-950/80 md:bg-red-950/40 backdrop-blur border border-red-500/30 pl-3 pr-5 py-3 rounded-lg border-l-4 border-l-red-500 hover:bg-red-950/60 transition-colors max-w-full">
                   <span className="text-xl md:text-2xl shrink-0">⚠</span>
                   <div className="flex flex-col min-w-0">
                     <Label className="text-red-400 font-bold mb-0.5 text-[10px] md:text-xs">AVERTISSEMENT DE SÉCURITÉ</Label>
