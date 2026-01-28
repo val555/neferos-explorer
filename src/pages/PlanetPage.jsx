@@ -126,9 +126,9 @@ export default function PlanetPage() {
 
                 <div className="flex items-center gap-3 mt-2">
                   <span className="w-8 md:w-12 h-px bg-purple-200/50"></span>
-                  <H2 color="secondary" className="text-xs md:text-base tracking-[0.2em] md:tracking-[0.3em] font-light text-purple-100">
-                    {systemNameDisplay}
-                  </H2>
+                    <span className="font-tektur font-light text-[10px] md:text-sm tracking-[0.3em] uppercase text-purple-200">
+                      {systemNameDisplay}
+                    </span>
                 </div>
               </motion.div>
             </div>

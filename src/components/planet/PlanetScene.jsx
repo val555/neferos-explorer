@@ -21,10 +21,11 @@ export default function PlanetScene({ planet }) {
       <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
 
       {/* La Planète (Avec gestion du chargement) */}
+      <group position={[0, 1, 0]}>
       <Suspense fallback={<Loader />}>
         <Planet3D planet={planet} />
       </Suspense>
-
+      </group>
       {/* Contrôles */}
       <OrbitControls 
         enablePan={false} 
