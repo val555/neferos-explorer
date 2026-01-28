@@ -98,10 +98,13 @@ export default function PlanetPage() {
             animate="visible"
             // Layout FLEX vertical qui sépare le haut (titre) du bas (description)
             // min-h-full permet de forcer le contenu à prendre toute la hauteur dispo
-            className="flex flex-col justify-between md:justify-center gap-4 md:gap-8 pointer-events-auto min-h-full md:min-h-0"
+            // MODIF IMPORTANTE : pointer-events-none SUR LE CONTAINER FLEX
+            // pour qu'il ne bloque pas les clics sur la planète au centre (espace vide entre titre et description)
+            className="flex flex-col justify-between md:justify-center gap-4 md:gap-8 pointer-events-none min-h-full md:min-h-0"
           >
             {/* BLOC TITRE PRINCIPAL (En haut) */}
-            <div className="relative">
+            {/* pointer-events-auto ajouté pour permettre la sélection du texte */}
+            <div className="relative pointer-events-auto">
               {/* Ligne décorative verticale (Desktop) */}
               <motion.div 
                 initial={{ height: 0 }}
@@ -135,9 +138,10 @@ export default function PlanetPage() {
 
 
             {/* BLOC DESCRIPTION (En bas grâce au justify-between) */}
+            {/* pointer-events-auto ajouté pour permettre interaction */}
             <motion.div 
               variants={variants.slideInLeft}
-              className="bg-neutral-900/80 md:bg-neutral-900/40 backdrop-blur-xl p-5 md:p-6 rounded-xl border border-white/10 md:border-white/5 shadow-2xl max-w-xl md:mt-0"
+              className="bg-neutral-900/80 md:bg-neutral-900/40 backdrop-blur-xl p-5 md:p-6 rounded-xl border border-white/10 md:border-white/5 shadow-2xl max-w-xl md:mt-0 pointer-events-auto"
             >
               <Body className="text-neutral-100 text-base md:text-lg leading-relaxed font-light">
                 {foundPlanet.description}
@@ -155,7 +159,7 @@ export default function PlanetPage() {
             {/* BLOC DANGER (Caché sur mobile) */}
             <motion.div 
               variants={variants.scaleUp}
-              className="mt-2 hidden md:block"
+              className="mt-2 hidden md:block pointer-events-auto"
             >
                <div className="inline-flex items-center gap-3 md:gap-4 bg-red-950/80 md:bg-red-950/40 backdrop-blur border border-red-500/30 pl-3 pr-5 py-3 rounded-lg border-l-4 border-l-red-500 hover:bg-red-950/60 transition-colors max-w-full">
                   <span className="text-xl md:text-2xl shrink-0">⚠</span>
