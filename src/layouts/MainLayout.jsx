@@ -29,8 +29,12 @@ const MainLayout = () => {
       <Breadcrumb />
 
       {/* 4. ZONE DE CONTENU (Layer 10) - Scrollable */}
-      {/* Mobile: pt-0 (le contenu gère son espacement) / Desktop: pt-24 (espace pour header + breadcrumb) */}
-      <main className="relative z-10 w-full min-h-screen pt-0 md:pt-24 px-4 pb-10">
+      {/* 
+          Gestion du padding : 
+          - Sur la page Planète, on veut du plein écran (px-0) pour que le fond noir touche les bords (Immersion).
+          - Sur les autres pages, on garde le padding standard (px-4) pour éviter que le contenu touche les bords.
+      */}
+      <main className={`relative z-10 w-full min-h-screen pt-0 md:pt-24 pb-10 ${isPlanetPage ? 'px-0' : 'px-4'}`}>
         <Outlet />
       </main>
       
