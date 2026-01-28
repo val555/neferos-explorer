@@ -12,8 +12,12 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
+  // Couleur de fond violet très sombre et OPAQUE (pas de transparence)
+  // Utilisation d'une valeur hexadécimale arbitraire proche de l'identité Neferos si la classe n'existe pas
+  const navBgClass = "bg-[#110518]"; 
+
   return (
-    <nav className="relative z-50 w-full bg-neferos-bg-surface backdrop-blur-md border-b border-white/10">
+    <nav className={`relative z-50 w-full ${navBgClass} border-b border-white/10`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           
@@ -78,7 +82,7 @@ export default function Navbar() {
 
       {/* 4. Menu Mobile (Dépliant) */}
       {isOpen && (
-        <div className="sm:hidden bg-neferos-bg-dark border-b border-white/10">
+        <div className={`sm:hidden ${navBgClass} border-b border-white/10`}>
           <div className="space-y-1 px-2 pt-2 pb-3">
             {navigation.map((item) => {
                const isActive = location.pathname === item.href;
