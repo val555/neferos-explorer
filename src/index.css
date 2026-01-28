@@ -1,36 +1,251 @@
 @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
 @import "tailwindcss";
 
 @theme {
-  /* Définition des couleurs Neferos */
-  --color-neferos-accent: #a400c0;
-  --color-neferos-light: #e36bed;
-  --color-neferos-dark: #361133;
-  --color-neferos-bg-dark: #1c1425;
-  --color-neferos-bg-surface: #2f1c42;
-  --color-neferos-text: #ffffff;
-  --color-neferos-text-secondary: #c7bdd5;
-  --color-neferos-text-pink: #e3b6ed;
+  /* ============================================
+     COLORS - Palette complète Neferos
+     ============================================ */
+  
+  /* Neutrals (grays) */
+  --color-neutral-950: #0a0a0a;
+  --color-neutral-900: #1c1425;  /* bg-dark */
+  --color-neutral-850: #2a2333;
+  --color-neutral-800: #2f1c42;  /* bg-surface */
+  --color-neutral-700: #3d2f4d;
+  --color-neutral-600: #4a3f56;
+  --color-neutral-500: #645a72;
+  --color-neutral-400: #7f7a92;
+  --color-neutral-300: #9b96ac;
+  --color-neutral-200: #c7bdd5;  /* text-secondary */
+  --color-neutral-100: #e5dfe8;
+  --color-neutral-50: #f2eff6;
+  --color-neutral-0: #ffffff;
 
-  /* Définition de la police personnalisée */
+  /* Purple (primary) */
+  --color-purple-900: #0d0408;
+  --color-purple-800: #1a0811;
+  --color-purple-700: #27001a;
+  --color-purple-600: #361133;    /* accent-dark */
+  --color-purple-500: #4a1554;
+  --color-purple-400: #612970;
+  --color-purple-300: #7d3d8a;
+  --color-purple-200: #a400c0;    /* ACCENT PRIMAIRE */
+  --color-purple-100: #d470e3;
+  --color-purple-50: #e8b3f0;
+
+  /* Pink (accent) */
+  --color-pink-600: #a80e55;
+  --color-pink-500: #d20a6b;
+  --color-pink-400: #e36bed;      /* accent-light */
+  --color-pink-300: #f08fd9;
+  --color-pink-200: #f5b5e8;
+  --color-pink-100: #fad9f0;
+
+  /* Status */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  /* ============================================
+     FONTS
+     ============================================ */
   --font-tektur: 'Tektur', sans-serif;
+  --font-space-grotesk: 'Space Grotesk', sans-serif;
+  --font-space-mono: 'Space Mono', monospace;
+
+  /* ============================================
+     EXTENDED SPACING (8px base unit)
+     ============================================ */
+  --spacing-0: 0;
+  --spacing-0-5: 2px;
+  --spacing-1: 4px;
+  --spacing-1-5: 6px;
+  --spacing-2: 8px;
+  --spacing-2-5: 10px;
+  --spacing-3: 12px;
+  --spacing-3-5: 14px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  --spacing-28: 112px;
+  --spacing-32: 128px;
+  --spacing-36: 144px;
+  --spacing-40: 160px;
+  --spacing-44: 176px;
+  --spacing-48: 192px;
+  --spacing-52: 208px;
+  --spacing-56: 224px;
+  --spacing-60: 240px;
+  --spacing-64: 256px;
+  --spacing-80: 320px;
+  --spacing-96: 384px;
+
+  /* ============================================
+     RADIUS
+     ============================================ */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
+  --radius-full: 9999px;
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-neferos-bg-dark text-neferos-text antialiased;
+  @apply bg-neutral-900 text-neutral-0 antialiased font-space-grotesk;
   margin: 0;
-  overflow: hidden; /* Important pour éviter les scrollbars parasites avec la 3D */
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Utilitaires pour le Layout */
+/* ============================================
+   TYPOGRAPHY DEFAULTS
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-tektur font-bold;
+  margin: 0;
+  line-height: 1.1;
+}
+
+h1 {
+  @apply text-4xl md:text-5xl lg:text-6xl;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  @apply text-3xl md:text-4xl;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  @apply text-2xl md:text-3xl;
+  letter-spacing: -0.005em;
+}
+
+h4 {
+  @apply text-xl;
+}
+
+h5 {
+  @apply text-lg font-semibold;
+  letter-spacing: 0.02em;
+}
+
+h6 {
+  @apply text-sm font-semibold uppercase;
+  letter-spacing: 0.1em;
+}
+
+p {
+  @apply text-base leading-relaxed;
+  margin: 0 0 1rem 0;
+}
+
+a {
+  @apply text-pink-400 hover:text-pink-300 transition-colors duration-200;
+  text-decoration: none;
+}
+
+code {
+  @apply font-space-mono text-sm bg-neutral-800/50 px-2 py-1 rounded;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Layout containers */
 .layout-container {
   @apply relative w-full h-screen overflow-hidden;
 }
 
 .content-layer {
-  @apply relative z-10 w-full h-full pointer-events-none; /* z-10 pour être au dessus des étoiles */
+  @apply relative z-10 w-full h-full pointer-events-none;
 }
 
 .content-layer > * {
-  @apply pointer-events-auto; /* Réactive les clics sur les éléments enfants */
+  @apply pointer-events-auto;
+}
+
+/* Responsive container */
+.container-responsive {
+  @apply w-full px-4 md:px-6 lg:px-8 mx-auto;
+}
+
+/* Glass effect */
+.glass-effect {
+  @apply bg-neutral-800/50 backdrop-blur-md border border-neutral-700/30;
+}
+
+/* Glow effects */
+.glow-purple {
+  @apply shadow-[0_0_20px_rgba(164,0,192,0.3)];
+}
+
+.glow-pink {
+  @apply shadow-[0_0_15px_rgba(227,107,237,0.3)];
+}
+
+/* Accent line (left border) */
+.accent-line {
+  @apply border-l-2 border-purple-200 pl-4;
+}
+
+/* Transitions by default */
+* {
+  @apply transition-colors duration-200 ease-out;
+}
+
+/* Disable transitions for specific elements */
+.no-transition * {
+  @apply transition-none;
+}
+
+/* Focus ring (accessibility) */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-purple-200;
+}
+
+/* Scrollbar styling (if needed) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-neutral-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-600;
+}
+
+/* Selection color */
+::selection {
+  @apply bg-purple-200 text-neutral-900;
 }
