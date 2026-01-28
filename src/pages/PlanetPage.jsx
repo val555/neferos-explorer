@@ -10,11 +10,12 @@
  */
 
 import { useParams, Link } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import galaxyData from '../data/neferos-data.json';
 import PlanetScene from '../components/planet/PlanetScene';
 import { H1, H2, Body, BodySmall, Label, TechLabel } from '../components/design-system/Text';
-import { spacing, colors, transitions, variants } from '../theme';
+import {    variants } from '../theme';
 
 export default function PlanetPage() {
   const { planetId } = useParams();
@@ -80,23 +81,12 @@ export default function PlanetPage() {
 
         {/* COLONNE 2: Contenu Principal */}
         <div className="flex flex-col justify-start md:justify-center h-full px-4 md:px-0 relative z-20 pt-20 md:pt-0 overflow-y-auto md:overflow-visible pb-32 md:pb-0 scrollbar-hide">
-          
-          {/* HEADER RETOUR (Mobile only) - Positionné en haut à gauche */}
-          <div className="absolute top-4 left-4 md:hidden pointer-events-auto z-50">
-             <Link 
-              to={`/system/${parentSystem.id}`} 
-              className="flex items-center gap-2 text-pink-400 bg-neutral-900/80 backdrop-blur-md px-4 py-2 rounded-full border border-pink-400/30 shadow-lg"
-            >
-              <span className="text-lg">←</span>
-              <span className="text-sm font-bold uppercase tracking-wide">Retour</span>
-            </Link>
-          </div>
 
           <motion.div 
             variants={variants.staggerContainer}
             initial="hidden"
             animate="visible"
-            className="flex flex-col gap-4 md:gap-8 pointer-events-auto mt-12 md:mt-0"
+            className="flex flex-col gap-4 md:gap-8 pointer-events-auto mt-0 md:mt-0"
           >
             {/* BLOC TITRE PRINCIPAL */}
             <div className="relative">
@@ -131,7 +121,7 @@ export default function PlanetPage() {
             {/* BLOC DESCRIPTION - Fond renforcé pour lisibilité sur mobile */}
             <motion.div 
               variants={variants.slideInLeft}
-              className="bg-neutral-900/80 md:bg-neutral-900/40 backdrop-blur-xl p-5 md:p-6 rounded-xl border border-white/10 md:border-white/5 shadow-2xl max-w-xl"
+              className="mt-[45vh] bg-neutral-900/80 md:bg-neutral-900/40 backdrop-blur-xl p-5 md:p-6 rounded-xl border border-white/10 md:border-white/5 shadow-2xl max-w-xl"
             >
               <Body className="text-neutral-100 text-base md:text-lg leading-relaxed font-light">
                 {foundPlanet.description}
@@ -150,7 +140,7 @@ export default function PlanetPage() {
               variants={variants.scaleUp}
               className="mt-2"
             >
-               <div className="inline-flex items-center gap-3 md:gap-4 bg-red-950/80 md:bg-red-950/40 backdrop-blur border border-red-500/30 pl-3 pr-5 py-3 rounded-lg border-l-4 border-l-red-500 hover:bg-red-950/60 transition-colors max-w-full">
+               <div className="hidden md:inline-flex items-center gap-3 md:gap-4 bg-red-950/80 md:bg-red-950/40 backdrop-blur border border-red-500/30 pl-3 pr-5 py-3 rounded-lg border-l-4 border-l-red-500 hover:bg-red-950/60 transition-colors max-w-full">
                   <span className="text-xl md:text-2xl shrink-0">⚠</span>
                   <div className="flex flex-col min-w-0">
                     <Label className="text-red-400 font-bold mb-0.5 text-[10px] md:text-xs">AVERTISSEMENT DE SÉCURITÉ</Label>
@@ -171,7 +161,7 @@ export default function PlanetPage() {
         initial={{ y: 100 }}
         animate={{ y: 0 }}
         transition={{ delay: 1, type: "spring" }}
-        className="absolute bottom-16 md:bottom-0 left-0 right-0 z-30 pointer-events-auto"
+        className="hidden md:block absolute bottom-0 left-0 right-0 z-30 pointer-events-auto"
       >
         <div className="bg-neutral-900/90 backdrop-blur-lg border-t border-white/10 px-4 py-4 md:px-12 md:py-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto">
@@ -196,7 +186,7 @@ export default function PlanetPage() {
       </motion.div>
       
       {/* SAISON BADGE (Top Right Absolute) - Caché sur très petits écrans si besoin, ou réduit */}
-      <div className="absolute top-4 right-4 md:top-8 md:right-8 z-30 pointer-events-auto">
+      <div className="hidden md:absolute top-4 right-4 md:top-8 md:right-8 z-30 pointer-events-auto">
         <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -206,7 +196,7 @@ export default function PlanetPage() {
               S3
             </div>
             <span className="font-tektur text-[10px] md:text-xs tracking-widest uppercase text-neutral-300 hidden sm:block">
-              Saison Aidonner
+              Faction Saïdour
             </span>
           </motion.div>
       </div>

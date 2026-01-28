@@ -104,7 +104,7 @@ export default function Breadcrumb() {
 
       {/* --- MOBILE VERSION (Horizontale en bas) --- */}
       {/* pb-12 pour bien espacer du bord bas */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-center items-center pb-12 pt-6 bg-gradient-to-t from-neutral-900 via-neutral-900/80 to-transparent pointer-events-none">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-center items-center pb-20 pt-6 bg-gradient-to-t from-neutral-900 via-neutral-900/80 to-transparent pointer-events-none">
         <div className="flex items-center gap-10 pointer-events-auto relative">
            
            {/* Ligne horizontale */}

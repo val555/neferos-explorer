@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import galaxyData from '../data/neferos-data.json';
-import SectorButton from '../components/galaxy/SectorButton';
+import SectorButton from '../components/galaxy/SectorButton.jsx';
 import galaxySpiral from '../assets/images/galaxy-spiral.svg';
 
 export default function HomePage() {
