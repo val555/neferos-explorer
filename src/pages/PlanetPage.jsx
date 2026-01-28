@@ -13,7 +13,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import galaxyData from '../data/neferos-data.json';
 import PlanetScene from '../components/planet/PlanetScene';
-import { H1, H2, Body, Label, TechLabel } from '../components/design-system/Text';
+import { H1, H2, Body, BodySmall, Label, TechLabel } from '../components/design-system/Text';
 import { spacing, colors, transitions, variants } from '../theme';
 
 export default function PlanetPage() {
