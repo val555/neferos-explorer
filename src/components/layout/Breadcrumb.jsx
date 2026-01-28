@@ -53,19 +53,23 @@ export default function Breadcrumb() {
       </div>
 
       {/* --- MOBILE VERSION (Horizontale en bas) --- */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-center items-center pb-6 pt-4 bg-gradient-to-t from-neutral-900 to-transparent pointer-events-none">
-        <div className="flex items-center gap-8 pointer-events-auto">
+      {/* pb-10 pour remonter le tout du bas de l'écran */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-center items-center pb-10 pt-6 bg-gradient-to-t from-neutral-900 via-neutral-900/80 to-transparent pointer-events-none">
+        <div className="flex items-center gap-10 pointer-events-auto relative">
+           
            {/* Ligne horizontale */}
-           <div className="absolute left-1/2 -translate-x-1/2 bottom-[34px] w-32 h-0.5 bg-white/10 -z-10" />
+           {/* top-[5px] pour aligner parfaitement avec le centre des points de 12px (h-3) */}
+           {/* left/right ajustés pour ne pas dépasser sur les textes */}
+           <div className="absolute left-6 right-6 top-[5px] h-0.5 bg-white/10 -z-10" />
 
            {steps.map((step, index) => (
-            <div key={index} className="flex flex-col items-center gap-2 relative">
+            <div key={index} className="flex flex-col items-center gap-2 relative w-12">
               <Link to={step.link || '#'} className={`${step.link ? 'cursor-pointer' : 'cursor-default'}`}>
                 <div 
-                  className={`w-3 h-3 rounded-full border-2 transition-all duration-300 relative z-10
+                  className={`w-3 h-3 rounded-full border-2 transition-all duration-300 relative z-10 bg-neutral-900
                     ${step.active 
-                      ? 'bg-neferos-bg-dark border-pink-400 shadow-[0_0_8px_#e36bed]' 
-                      : 'bg-neferos-bg-dark border-white/20'
+                      ? 'border-pink-400 shadow-[0_0_8px_#e36bed]' 
+                      : 'border-white/20'
                     }
                   `}
                 >
@@ -75,9 +79,8 @@ export default function Breadcrumb() {
                 </div>
               </Link>
               
-              {/* Label (affiché seulement si actif sur mobile pour économiser place, ou très petit) */}
               <span 
-                className={`font-tektur text-[10px] tracking-wider uppercase transition-all duration-300
+                className={`font-tektur text-[9px] tracking-wider uppercase transition-all duration-300 absolute top-6 whitespace-nowrap
                   ${step.active 
                     ? 'text-white font-bold opacity-100' 
                     : 'text-white/40 opacity-70'
