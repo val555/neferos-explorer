@@ -10,7 +10,11 @@ const MainLayout = () => {
   const isPlanetPage = location.pathname.includes('/planet/');
 
   return (
-    <div className="relative w-full min-h-screen bg-neferos-bg-dark text-white overflow-hidden">
+    // MODIFICATION ICI : 
+    // Si on est sur la page Planète, on force le fond global en NOIR (bg-black).
+    // Sinon, on garde le violet sombre par défaut (bg-neferos-bg-dark).
+    // Cela corrige les zones violettes résiduelles (sous le breadcrumb, etc.).
+    <div className={`relative w-full min-h-screen text-white overflow-hidden ${isPlanetPage ? 'bg-black' : 'bg-neferos-bg-dark'}`}>
       
       {/* 1. FOND (Layer 0) - Fixe */}
       {/* Rendu conditionnel : Pas d'étoiles CSS sur la page Planète */}
