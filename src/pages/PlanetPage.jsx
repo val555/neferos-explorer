@@ -61,7 +61,9 @@ export default function PlanetPage() {
 
   return (
     // Main container: occupe tout l'espace disponible sous la navbar
-    <div className="w-full h-[calc(100vh-6rem)] relative overflow-hidden font-space-grotesk bg-neutral-900">
+    // MODIFICATION ICI: Suppression de bg-neutral-900 pour éviter de masquer la scène 3D
+    // Remplacement par bg-black pour un fond spatial profond
+    <div className="w-full h-[calc(100vh-6rem)] relative overflow-hidden font-space-grotesk bg-black">
       
       {/* ============================================
           1. SCÈNE 3D (Background Layer)
