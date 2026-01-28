@@ -1,12 +1,12 @@
 /**
  * 🌍 PLANET PAGE
- * Affichage complet d'une plétante avec rendu 3D et UI
+ * Affichage complet d'une planète avec rendu 3D et UI
  * 
- * Utilise:
- * - Design tokens (colors, spacing, typography, transitions)
- * - Composants réutilisables (Text)
- * - Responsive mobile-first
- * - Framer Motion pour animations
+ * DESIGN UPDATE (Deep Refactor):
+ * - Layout robuste avec "Safe Zones" pour la navigation latérale (Breadcrumb)
+ * - Typographie affinée (hierarchy, spacing)
+ * - Conteneurs textuels avec protection de contraste (backdrop)
+ * - Structure Grid pour un alignement précis
  */
 
 import { useParams, Link } from 'react-router-dom';
@@ -46,158 +46,168 @@ export default function PlanetPage() {
   }
 
   return (
-    // Main container: full viewport
-    <div className="w-full h-[calc(100vh-4rem)] relative overflow-hidden font-space-grotesk rounded-2xl border border-neutral-700/20 bg-black/20">
+    // Main container: occupe tout l'espace disponible sous la navbar
+    // Utilisation de relative pour le positionnement du background 3D
+    <div className="w-full h-[calc(100vh-6rem)] relative overflow-hidden font-space-grotesk">
       
       {/* ============================================
-          1. SCÈNE 3D (Background)
+          1. SCÈNE 3D (Background Layer)
           ============================================ */}
       <div className="absolute inset-0 z-0">
         <PlanetScene planet={foundPlanet} />
+        {/* Gradient Overlay pour assurer la lisibilité du texte sur les bords */}
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-900/90 via-transparent to-neutral-900/20 pointer-events-none" />
       </div>
 
       {/* ============================================
-          2. UI OVERLAY (Contenu interactif)
+          2. UI LAYER (Grid Layout)
           ============================================ */}
-      <div className="absolute inset-0 z-10 pointer-events-none flex flex-col justify-between p-4 md:p-6 lg:p-8">
+      {/* 
+         Structure Grid:
+         - Colonne gauche: Navigation Breadcrumb (espace réservé ~80px-100px)
+         - Colonne centrale: Contenu principal
+         - Colonne droite: Informations secondaires / vide
+      */}
+      <div className="absolute inset-0 z-10 pointer-events-none grid grid-cols-[80px_1fr] md:grid-cols-[120px_1fr_1fr] lg:grid-cols-[140px_minmax(400px,600px)_1fr] h-full">
         
-        {/* --- HEADER (Haut de page) --- */}
-        <div className="flex justify-between items-start pointer-events-auto w-full gap-4 z-20">
+        {/* COLONNE 1: Espace réservé pour le Breadcrumb (Gauche) */}
+        <div className="hidden md:block" /> 
+
+        {/* COLONNE 2: Contenu Principal */}
+        <div className="flex flex-col justify-center h-full px-6 md:px-0 relative z-20">
           
-          {/* BOUTON RETOUR (Gauche) */}
-          <Link 
-            to={`/system/${parentSystem.id}`} 
-            className="flex items-center gap-2 text-pink-400 hover:text-pink-300 text-xs md:text-sm tracking-widest uppercase transition-colors duration-200 group opacity-80 hover:opacity-100 bg-neutral-900/40 backdrop-blur-sm px-3 py-1 rounded-full border border-pink-400/20"
-          >
-            <motion.span 
-              className="text-lg"
-              whileHover={{ x: -4 }}
-              transition={transitions.transition.micro}
+          {/* HEADER RETOUR (Mobile only - Desktop handled by layout) */}
+          <div className="absolute top-4 left-4 md:hidden pointer-events-auto">
+             <Link 
+              to={`/system/${parentSystem.id}`} 
+              className="flex items-center gap-2 text-pink-400 bg-neutral-900/60 backdrop-blur px-3 py-1 rounded-full border border-pink-400/20"
             >
-              ←
-            </motion.span>
-            <span className="hidden sm:inline">Retour au système</span>
-            <span className="sm:hidden">Retour</span>
-          </Link>
+              <span>← Retour</span>
+            </Link>
+          </div>
 
-          {/* LOGO FACTION (Droite) */}
           <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={transitions.transition.slow}
-            className="flex items-center gap-2 md:gap-4 bg-neutral-900/40 backdrop-blur-sm px-4 py-2 rounded-full border border-neutral-700/30"
-          >
-            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-neutral-200/80 flex items-center justify-center relative shrink-0">
-              <div className="absolute inset-0 border border-neutral-200/30 rounded-full scale-110" /> 
-              <span className="text-sm md:text-base">⛟</span> 
-            </div>
-            <span className="text-xs md:text-sm font-tektur font-bold text-neutral-0 uppercase tracking-widest hidden sm:block">
-              Saison Aidonner
-            </span>
-          </motion.div>
-        </div>
-
-        {/* --- CONTENU PRINCIPAL (Gauche-Centre) --- */}
-        {/* Ajout d'un conteneur avec max-width et protection overlap */}
-        <div className="flex-1 flex items-center pointer-events-none z-10 my-4 md:my-0">
-          <motion.div 
-            variants={variants.slideInLeft}
+            variants={variants.staggerContainer}
             initial="hidden"
             animate="visible"
-            className="pointer-events-auto max-w-sm md:max-w-md lg:max-w-lg ml-0 md:ml-4 lg:ml-12 relative"
+            className="flex flex-col gap-6 md:gap-8 pointer-events-auto"
           >
-            
-            {/* Background subtil pour améliorer la lisibilité sur la planète */}
-            <div className="absolute -inset-6 bg-radial-gradient from-neutral-900/80 to-transparent opacity-80 blur-xl -z-10 rounded-full" />
-            
-            {/* Ligne accent (gauche) */}
-            <motion.div 
-              initial={{ height: 0 }}
-              animate={{ height: "100%" }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="absolute -left-4 md:-left-8 top-0 w-px bg-gradient-to-b from-purple-200 via-pink-400 to-transparent opacity-50 hidden md:block" 
-            />
-            
-            {/* LABEL TECHNIQUE */}
-            <TechLabel className="text-pink-400 mb-2 opacity-80 block text-[10px] md:text-xs">
-              PLANÈTE GLACIALE • CLASSE IV
-            </TechLabel>
+            {/* BLOC TITRE PRINCIPAL */}
+            <div className="relative">
+              {/* Ligne décorative verticale */}
+              <motion.div 
+                initial={{ height: 0 }}
+                animate={{ height: "100%" }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                className="absolute -left-6 top-0 w-1 bg-gradient-to-b from-purple-200 via-pink-400 to-transparent opacity-60 hidden md:block rounded-full" 
+              />
 
-            {/* TITRE PLANiTE (Grand, impactant) */}
-            <H1 className="mb-1 leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] text-4xl md:text-5xl lg:text-7xl">
-              {foundPlanet.name}
-            </H1>
-            
-            {/* SOUS-TITRE SYSTÈME */}
-            <H2 color="secondary" className="mb-4 text-xs md:text-sm lg:text-base uppercase tracking-[0.2em] font-light flex items-center gap-2">
-              <span className="w-2 h-2 bg-purple-200 rounded-full inline-block animate-pulse"></span>
-              Système {parentSystem.name}
-            </H2>
+              <motion.div variants={variants.slideInLeft} className="space-y-2">
+                <TechLabel className="text-pink-400 opacity-90 text-xs md:text-sm tracking-widest">
+                  PLANÈTE GLACIALE • CLASSE IV
+                </TechLabel>
+                
+                <H1 className="text-5xl md:text-6xl lg:text-8xl leading-none text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-neutral-400 drop-shadow-lg">
+                  {foundPlanet.name}
+                </H1>
 
-            {/* DESCRIPTION PLANiTE */}
-            <div className="bg-neutral-900/30 backdrop-blur-sm p-4 rounded-lg border-l-2 border-purple-200/50 mb-6">
-              <Body className="leading-relaxed text-neutral-100 text-sm md:text-base drop-shadow-md">
-                {foundPlanet.description}
-              </Body>
-              <div className="mt-3 text-xs text-neutral-300/80 italic border-t border-neutral-700/50 pt-2">
-                "5e planète du système. N'a été visitée que deux fois par la vie de ce système..."
-              </div>
+                <div className="flex items-center gap-3 mt-2">
+                  <span className="w-12 h-px bg-purple-200/50"></span>
+                  <H2 color="secondary" className="text-sm md:text-base tracking-[0.3em] font-light text-purple-100">
+                    SYSTÈME {parentSystem.name.toUpperCase()}
+                  </H2>
+                </div>
+              </motion.div>
             </div>
 
-            {/* PANEL AVERTISSEMENT (Compact) */}
+            {/* BLOC DESCRIPTION */}
+            <motion.div 
+              variants={variants.slideInLeft}
+              className="bg-neutral-900/40 backdrop-blur-md p-6 rounded-xl border border-white/5 shadow-2xl max-w-xl"
+            >
+              <Body className="text-neutral-100 text-lg leading-relaxed font-light">
+                {foundPlanet.description}
+              </Body>
+              
+              <div className="mt-6 flex items-start gap-3 pt-4 border-t border-white/10">
+                <div className="w-1.5 h-1.5 bg-pink-400 rounded-full mt-2 shrink-0 animate-pulse" />
+                <BodySmall className="text-neutral-300 italic">
+                  "5e planète du système. N'a été visitée que deux fois par la vie de ce système, ils n'ont pas encore découvert la colonie minière sous les nuages..."
+                </BodySmall>
+              </div>
+            </motion.div>
+
+            {/* BLOC DANGER */}
             <motion.div 
               variants={variants.scaleUp}
-              className="border border-red-500/30 bg-red-900/20 backdrop-blur-md p-3 md:p-4 rounded-r-xl border-l-4 border-l-red-500 relative overflow-hidden group max-w-sm"
+              className="mt-2"
             >
-              <div className="flex items-start gap-3">
-                <span className="text-red-400 text-lg">⚠</span>
-                <div>
-                  <Label className="text-red-400 font-bold block mb-1 text-xs tracking-wider">DANGER ENVIRONNEMENTAL</Label>
-                  <BodySmall className="text-neutral-200 leading-tight">
-                    Évitez de tirer des torpilles à protons dans les nuages (Hydrogène instable).
-                  </BodySmall>
-                </div>
-              </div>
+               <div className="inline-flex items-center gap-4 bg-red-950/40 backdrop-blur border border-red-500/30 pl-4 pr-6 py-3 rounded-lg border-l-4 border-l-red-500 hover:bg-red-950/60 transition-colors">
+                  <span className="text-2xl">⚠</span>
+                  <div className="flex flex-col">
+                    <Label className="text-red-400 font-bold mb-0.5">AVERTISSEMENT DE SÉCURITÉ</Label>
+                    <span className="text-red-100/80 text-xs md:text-sm font-mono">
+                      Atmosphère explosive : Tir de protons interdit.
+                    </span>
+                  </div>
+               </div>
             </motion.div>
 
           </motion.div>
         </div>
 
-        {/* --- FOOTER (Bottom info - Responsive) --- */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ ...transitions.transition.medium, delay: 0.4 }}
-          className="pointer-events-auto mt-auto pt-4 border-t border-neutral-700/30 bg-neutral-900/60 backdrop-blur-md -mx-4 -mb-4 px-4 py-4 md:mx-0 md:mb-0 md:bg-transparent md:backdrop-blur-none md:border-t-0"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 lg:gap-12">
-            
-            {/* Type */}
-            <div className="border-l border-neutral-700 pl-3 md:border-l-0 md:pl-0">
-              <Label className="text-purple-200 opacity-70 mb-1 block text-[10px] uppercase">Classification</Label>
-              <div className="text-neutral-0 text-sm md:text-base font-tektur font-medium">{foundPlanet.type}</div>
-            </div>
-            
-            {/* Distance */}
-            <div className="border-l border-neutral-700 pl-3 md:border-l-0 md:pl-0">
-              <Label className="text-purple-200 opacity-70 mb-1 block text-[10px] uppercase">Orbital Dist.</Label>
-              <div className="text-neutral-0 text-sm md:text-base font-tektur font-medium">{foundPlanet.distanceAU} AU</div>
-            </div>
-            
-            {/* Rayon */}
-            <div className="border-l border-neutral-700 pl-3 md:border-l-0 md:pl-0">
-              <Label className="text-purple-200 opacity-70 mb-1 block text-[10px] uppercase">Rayon Planétaire</Label>
-              <div className="text-neutral-0 text-sm md:text-base font-tektur font-medium">{foundPlanet.radius} R⊕</div>
-            </div>
-            
-            {/* Secteur */}
-            <div className="border-l border-neutral-700 pl-3 md:border-l-0 md:pl-0">
-              <Label className="text-purple-200 opacity-70 mb-1 block text-[10px] uppercase">Secteur Galactique</Label>
-              <div className="text-neutral-0 text-sm md:text-base font-tektur font-medium">{parentSector.name}</div>
-            </div>
-          </div>
-        </motion.div>
+        {/* COLONNE 3: Stats (Bottom Right) */}
+        <div className="hidden lg:flex flex-col justify-end pb-12 pr-12 pointer-events-none z-20">
+             {/* Stats déplacées en bas à droite pour équilibrer la compo */}
+        </div>
+        
       </div>
+
+      {/* FOOTER STATS (Mobile/Tablet: Bottom Fixed, Desktop: Bottom Right overlay) */}
+      <motion.div 
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        transition={{ delay: 1, type: "spring" }}
+        className="absolute bottom-0 left-0 right-0 z-30 pointer-events-auto"
+      >
+        <div className="bg-neutral-900/80 backdrop-blur-lg border-t border-white/10 px-6 py-4 md:px-12 md:py-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+             <div className="flex flex-col">
+                <Label className="text-neutral-500 mb-1">TYPE</Label>
+                <span className="font-tektur text-xl text-white">{foundPlanet.type}</span>
+             </div>
+             <div className="flex flex-col">
+                <Label className="text-neutral-500 mb-1">DISTANCE</Label>
+                <span className="font-tektur text-xl text-white">{foundPlanet.distanceAU} AU</span>
+             </div>
+             <div className="flex flex-col">
+                <Label className="text-neutral-500 mb-1">RAYON</Label>
+                <span className="font-tektur text-xl text-white">{foundPlanet.radius} R⊕</span>
+             </div>
+             <div className="flex flex-col">
+                <Label className="text-neutral-500 mb-1">SECTEUR</Label>
+                <span className="font-tektur text-xl text-purple-300">{parentSector.name}</span>
+             </div>
+          </div>
+        </div>
+      </motion.div>
+      
+      {/* SAISON BADGE (Top Right Absolute) */}
+      <div className="absolute top-8 right-8 z-30 pointer-events-auto">
+        <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex items-center gap-3 bg-black/40 backdrop-blur rounded-full pl-2 pr-4 py-2 border border-white/10 hover:border-white/30 transition-colors cursor-help"
+          >
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center text-xs shadow-lg shadow-purple-500/20">
+              S3
+            </div>
+            <span className="font-tektur text-xs tracking-widest uppercase text-neutral-300">
+              Saison Aidonner
+            </span>
+          </motion.div>
+      </div>
+
     </div>
   );
 }
