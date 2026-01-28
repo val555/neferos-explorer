@@ -8,9 +8,9 @@ function Loader() {
 }
 
 export default function PlanetScene({ planet }) {
-  // Ajustement de la caméra : position Z augmentée (6 -> 9) pour éloigner la planète (donc la réduire visuellement)
+  // Ajustement de la caméra : position Z augmentée (9 -> 12) pour que la planète rentre entièrement sur mobile (portrait)
   return (
-    <Canvas camera={{ position: [0, 0, 9], fov: 45 }}>
+    <Canvas camera={{ position: [0, 0, 12], fov: 45 }}>
       {/* Lumières */}
       <ambientLight intensity={0.2} />
       <directionalLight position={[5, 3, 5]} intensity={2} />
@@ -30,7 +30,7 @@ export default function PlanetScene({ planet }) {
         enablePan={false} 
         enableZoom={true} 
         minDistance={5} 
-        maxDistance={20} 
+        maxDistance={25} 
         autoRotate={false}
       />
     </Canvas>
