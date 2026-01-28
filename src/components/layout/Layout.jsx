@@ -1,10 +1,12 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from './Header';
 import Breadcrumb from './Breadcrumb';
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Layout() {
   const location = useLocation();
+  // eslint-disable-next-line no-unused-vars
   const isHome = location.pathname === '/';
 
   return (
