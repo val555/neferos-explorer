@@ -19,7 +19,8 @@
               "name": "Drogmoss",
               "type": "Glaciale",
               "texture": "/textures/Drogmoss-2K.png",
-              "description": "Un monde de glace",
+              "description": "Berceau de la civilisation Saïdour",
+              "information": "Planète glaciale hostile. Sa surface est morcelée en vastes continents, séparés par des mers froides et agitées. Dominée par la chaîne montagneuse escarpée de Rothrill et recouverte de forêts de givrepins, elle abrite une faune robuste dont le super-prédateur est le légendaire Galdior",
               "distanceAU": 0.4,
               "radius": 1.2
             }

@@ -141,7 +141,7 @@ export default function PlanetPage() {
             {/* pointer-events-auto ajouté pour permettre interaction */}
             <motion.div 
               variants={variants.slideInLeft}
-              className="bg-neutral-900/80 md:bg-neutral-900/40 backdrop-blur-xl p-5 md:p-6 rounded-xl border border-white/10 md:border-white/5 shadow-2xl max-w-xl md:mt-0 pointer-events-auto"
+              className="mt-88 md:mt-0 bg-neutral-900/80 md:bg-neutral-900/40 backdrop-blur-xl p-5 md:p-6 rounded-xl border border-white/10 md:border-white/5 shadow-2xl max-w-xl md:mt-0 pointer-events-auto"
             >
               <Body className="text-neutral-100 text-base md:text-lg leading-relaxed font-light">
                 {foundPlanet.description}
@@ -150,26 +150,9 @@ export default function PlanetPage() {
               <div className="mt-4 md:mt-6 flex items-start gap-3 pt-4 border-t border-white/10">
                 <div className="w-1.5 h-1.5 bg-pink-400 rounded-full mt-2 shrink-0 animate-pulse" />
                 <BodySmall className="text-neutral-300 italic text-xs md:text-sm">
-                  "5e planète du système. N'a été visitée que deux fois par la vie de ce système..."
+                  {foundPlanet.information}
                 </BodySmall>
               </div>
-            </motion.div>
-
-
-            {/* BLOC DANGER (Caché sur mobile) */}
-            <motion.div 
-              variants={variants.scaleUp}
-              className="mt-2 hidden md:block pointer-events-auto"
-            >
-               <div className="inline-flex items-center gap-3 md:gap-4 bg-red-950/80 md:bg-red-950/40 backdrop-blur border border-red-500/30 pl-3 pr-5 py-3 rounded-lg border-l-4 border-l-red-500 hover:bg-red-950/60 transition-colors max-w-full">
-                  <span className="text-xl md:text-2xl shrink-0">⚠</span>
-                  <div className="flex flex-col min-w-0">
-                    <Label className="text-red-400 font-bold mb-0.5 text-[10px] md:text-xs">AVERTISSEMENT DE SÉCURITÉ</Label>
-                    <span className="text-red-100/80 text-xs md:text-sm font-mono truncate md:whitespace-normal">
-                      Atmosphère explosive : Tir interdit.
-                    </span>
-                  </div>
-               </div>
             </motion.div>
 
 
