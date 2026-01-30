@@ -10,13 +10,13 @@ export default function HomePage() {
 
   return (
     // Nettoyage: Plus de pt-20, plus de min-h-screen
-    <div className="w-full flex flex-col items-center justify-center relative py-10">
+    <div className="w-full min-h-[calc(100vh-100px)] flex flex-col items-center justify-center relative overflow-hidden">
       
       {/* 1. TITRE PRINCIPAL */}
       <div className="absolute top-0 md:top-10 left-1/2 -translate-x-1/2 text-center z-20 flex flex-col items-center pointer-events-none">
-        <h1 className="font-tektur font-normal text-4xl md:text-6xl text-white tracking-widest mb-1 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+        <span className="font-tektur font-normal text-2xl md:text-6xl text-white tracking-widest mb-1 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
           {galaxyName}
-        </h1>
+        </span>
         <span className="font-tektur font-normal text-sm md:text-lg text-neferos-text-secondary tracking-[0.3em] uppercase opacity-70">
           Galaxie
         </span>

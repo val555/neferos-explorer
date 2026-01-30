@@ -124,11 +124,11 @@ body {
    TYPOGRAPHY DEFAULTS
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
-  @apply font-tektur font-bold;
+  @apply font-tektur;
   margin: 0;
   line-height: 1.1;
 }
-
+/*
 h1 {
   @apply text-4xl md:text-5xl lg:text-6xl;
   letter-spacing: -0.02em;
@@ -157,7 +157,7 @@ h6 {
   @apply text-sm font-semibold uppercase;
   letter-spacing: 0.1em;
 }
-
+*/
 p {
   @apply text-base leading-relaxed;
   margin: 0 0 1rem 0;
