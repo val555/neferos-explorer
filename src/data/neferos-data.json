@@ -33,7 +33,26 @@
       "name": "Secteur Anjoury",
       "color": "#e36bed",
       "position": { "x": 76, "y": 76.5 },
-      "systems": []
+      "systems": [
+        {
+          "id": "system-Astriel",
+          "name": "Système Astriel",
+          "position": { "x": 20, "y": 30 },
+          "starType": "Red Giant",
+          "planets": [
+            {
+              "id": "planet-Aenastir",
+              "name": "Aenastir",
+              "type": "Oceanique",
+              "texture": "/textures/Aenastir-2K.png",
+              "description": "Berceau de la civilisation Anjoury",
+              "information": "Surnommée « La Planète Emeraude », Aenastir est un monde tropical du système binaire d'Astriel, éclairé par deux soleils rouges et célèbre pour ses îles volantes défiant la gravité. Cœur politique de l'Alliance Néfilienne, elle abrite la cité sainte d'Elanar et le quartier impérial de Naêlia, dominé par le monumental Palais d'or Amperius",
+              "distanceAU": 0.4,
+              "radius": 1.2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sector-est",
